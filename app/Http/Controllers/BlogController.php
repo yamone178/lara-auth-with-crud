@@ -22,7 +22,7 @@ class BlogController extends Controller
     public function index()
     {
 
-        $blogs= Blog::all();
+        $blogs= Blog::paginate(10);
         return view('index',compact('blogs'));
     }
 
@@ -49,12 +49,9 @@ class BlogController extends Controller
            'description'=>$request->description
        ]);
 
-       $request->validate([
+       
 
-       ]);
-
-
-       return redirect()->route('blog.index');
+       return redirect()->route('blog.index')->with('status','New post is updated');
 
 
     }
@@ -67,7 +64,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        return view('show',compact('blog'));
     }
 
     /**
@@ -78,7 +75,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+       
+        return view('edit',compact('blog'));
     }
 
     /**
@@ -90,11 +88,14 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
+
+
+       
         $blog->title= $request->title;
         $blog->description= $request->description;
         $blog->update();
 
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.index')->with('status','New post is updated');
     }
 
     /**
@@ -105,6 +106,8 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+         return redirect()->route('blog.index')->with('status','New post is deleted');
+
     }
 }
