@@ -9,6 +9,19 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Dashboard') }}</div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        {{ __('You are logged in!') }}
+                    </div>
+                </div>
 
                 <div class="card">
                     <div class="card-body">
@@ -27,11 +40,6 @@
                         <div class="card-body border border-primary">
                             <h4 class="mb-3 text-primary fw-bold">{{$blog->title}}</h4>
                             <p class="mb-0">{{$blog->description}}</p>
-
-                            <div class="text-end mt-3">
-                                <a href="{{route('blog.edit')}}" class="btn btn-outline-warning me-3">Edit</a>
-                                <button class="btn btn-danger">Del</button>
-                            </div>
                         </div>
                     </div>
 

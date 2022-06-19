@@ -77,10 +77,8 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Blog $blog)
-
     {
-
-
+        //
     }
 
     /**
